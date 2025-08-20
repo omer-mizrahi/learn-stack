@@ -27,6 +27,12 @@ export default function useCounter({ initial, step, min, id = "default" }: Optio
         localStorage.setItem(key("step"), String(state.step))
     }, [state.value, state.step, id])
 
+    const resetAndClear = () => {
+        localStorage.removeItem(key("value"));
+        localStorage.removeItem(key("step"));
+        dispatch({ type: "reset" });
+    }
+
 
     return {
         value: state.value,
@@ -34,6 +40,7 @@ export default function useCounter({ initial, step, min, id = "default" }: Optio
         inc: () => dispatch({ type: "inc" }),
         dec: () => dispatch({ type: "dec" }),
         reset: () => dispatch({ type: "reset" }),
+        resetAndClear,
         setValueTo: (n: number) => dispatch({ type: "setValueTo", payload: n }),
         setStep: (n: number) => dispatch({ type: "setStep", payload: n }),
         min

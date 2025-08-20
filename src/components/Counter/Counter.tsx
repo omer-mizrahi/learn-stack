@@ -8,7 +8,7 @@ export default function Counter() {
             <h1>{value}</h1>
             <div style={{ display: "flex", gap: 8 }}>
                 <button onClick={inc}>+ Increase by {step}</button>
-                <button onClick={dec} disabled={value === min}>- Decrease by {step}</button>
+                <button onClick={dec} disabled={value <= min}>- Decrease by {step}</button>
                 <button onClick={reset}>reset</button>
             </div>
             <div style={{ marginTop: 12 }}>

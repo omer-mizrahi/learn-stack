@@ -20,9 +20,14 @@ export default function useCounter({ initial, step, min, id = "default" }: Optio
 
     function inc() { setValue(v => Math.max(min, v + s)) }
     function dec() { setValue(v => Math.max(min, v - s)) }
-    function set(n: number) { setValue(Math.max(min, n)) }
+    function setValueTo(n: number) { setValue(Math.max(min, n)) }
     function setStep(n: number) { setS(Number.isFinite(n) && n > 0 ? n : 1) }
-    function reset() { setValue(initial); setS(step) }
+    function reset() {
+        setValue(initial);
+        setS(step);
+        localStorage.removeItem(`counter:${id}:value`)
+        localStorage.removeItem(`counter:${id}:step`)
+    }
 
     useEffect(() => {
         localStorage.setItem(`counter:${id}:value`, String(value))
@@ -32,5 +37,5 @@ export default function useCounter({ initial, step, min, id = "default" }: Optio
         localStorage.setItem(`counter:${id}:step`, String(s))
     }, [s, id])
 
-    return { value, step: s, inc, dec, set, setStep, reset, min }
+    return { value, step: s, inc, dec, setValueTo, setStep, reset, min }
 }

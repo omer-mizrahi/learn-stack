@@ -1,7 +1,7 @@
 
 export default function Nav() {
     return (
-        <header className="p-2 ">
+        <header >
             <ul>
                 <li>Dashboard</li>
                 <li>Technologies</li>
